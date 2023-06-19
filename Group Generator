@@ -1,0 +1,30 @@
+import random
+
+def generate_groups(names, group_size):
+    """
+    Generates groups of the specified size from the list of names.
+    """
+    random.shuffle(names)  # Shuffle the list of names
+    groups = []
+    num_groups = len(names) // group_size
+
+    for i in range(num_groups):
+        group = names[i * group_size : (i + 1) * group_size]
+        groups.append(group)
+
+    # Handle remaining names if the number of names is not divisible by group_size
+    remaining_names = len(names) % group_size
+    if remaining_names > 0:
+        last_group = names[-remaining_names:]
+        groups.append(last_group)
+
+    return groups
+
+# Example usage
+name_list = ["Alice", "Bob", "Charlie", "David", "Eve", "Frank", "Grace", "Harry"]
+group_size = 3
+groups = generate_groups(name_list, group_size)
+
+# Print the generated groups
+for i, group in enumerate(groups):
+    print(f"Group {i+1}: {group}")
